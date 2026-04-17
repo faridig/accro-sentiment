@@ -63,6 +63,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
     
     - name: Check for secrets in code
       uses: gitleaks/gitleaks-action@v2
