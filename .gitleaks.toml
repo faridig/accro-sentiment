@@ -1,0 +1,64 @@
+# Gitleaks configuration for ACCRO Sentiment Analyzer
+title = "ACCRO Sentiment Analyzer Secrets Detection"
+
+[[rules]]
+description = "OpenAI API Key"
+id = "openai-api-key"
+regex = '''sk-[a-zA-Z0-9]{48}'''
+tags = ["key", "openai", "api"]
+
+[[rules]]
+description = "Generic API Key"
+id = "generic-api-key"
+regex = '''[a-zA-Z0-9]{32,}'''
+tags = ["key", "api"]
+
+[[rules]]
+description = "AWS Access Key"
+id = "aws-access-key"
+regex = '''AKIA[0-9A-Z]{16}'''
+tags = ["key", "aws"]
+
+[[rules]]
+description = "AWS Secret Key"
+id = "aws-secret-key"
+regex = '''(?i)aws(.{0,20})?['\"][0-9a-zA-Z\/+]{40}['\"]'''
+tags = ["key", "aws"]
+
+[[rules]]
+description = "Database URL with password"
+id = "database-url"
+regex = '''(postgres|mysql|mongodb)://[^:]+:[^@]+@'''
+tags = ["database", "password"]
+
+[[rules]]
+description = "JWT Secret"
+id = "jwt-secret"
+regex = '''(?i)jwt(.{0,20})?['\"][0-9a-zA-Z\-_=]{32,}['\"]'''
+tags = ["jwt", "secret"]
+
+# Allowlist - files to ignore
+[allowlist]
+files = [
+    ".env.example",
+    "test_*.py",
+    "*.test.py",
+    "*.spec.py"
+]
+
+paths = [
+    "tests/",
+    "docs/"
+]
+
+commits = [
+    "initial commit",
+    "chore: initial project setup"
+]
+
+regexes = [
+    '''example.*key''',
+    '''test.*key''',
+    '''fake.*key''',
+    '''dummy.*key'''
+]

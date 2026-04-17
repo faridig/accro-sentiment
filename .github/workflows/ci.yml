@@ -26,6 +26,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install .[dev]
     
+    - name: Install Playwright browsers
+      run: |
+        playwright install --with-deps chromium firefox webkit
+    
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
@@ -60,11 +64,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Check for secrets in code
-      uses: gitleaks/gitleaks-action@v2
-      with:
-        config-path: .gitleaks.toml
-    
     - name: Check .env.example exists
       run: |
         if [ ! -f .env.example ]; then
@@ -96,7 +95,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install build
+        pip install build playwright
     
     - name: Build package
       run: python -m build

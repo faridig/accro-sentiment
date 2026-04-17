@@ -82,3 +82,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# OpenCode configuration
+.opencode/
+openrtk/
