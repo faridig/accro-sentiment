@@ -78,17 +78,57 @@
 
 ## 🎓 LEÇONS APPRISES
 
-*Aucune leçon apprise pour le moment - Sprint 0 en cours*
+### 💡 SPRINT 0 - DEVOPS FIRST (2026-04-17)
+
+#### **Leçon 1 : Qualité de code dès le départ**
+**Problème** : Code initial avec violations de linting (black, isort, flake8)  
+**Solution** : Exécuter systématiquement les outils de qualité avant chaque commit  
+**Action** : Ajouter `black src tests && isort src tests && flake8 src` au workflow de développement  
+**Impact** : Évite l'accumulation de dette technique et garantit un code propre dès le Sprint 0
+
+#### **Leçon 2 : Cohérence CI/local critique**
+**Problème** : Environnement local incomplet (Playwright avec seulement Chromium) vs CI complet  
+**Solution** : Vérifier que les mêmes commandes passent localement et en CI  
+**Action** : Script de vérification locale reprenant exactement les étapes du CI  
+**Impact** : Développement reproductible et réduction des "ça marche sur ma machine"
+
+#### **Leçon 3 : Attention aux imports inutilisés**
+**Problème** : Import `typing.Optional` non utilisé dans `src/main.py`  
+**Solution** : Utiliser `flake8 --select=F401` pour détecter les imports inutilisés  
+**Action** : Revue systématique des imports et suppression du code mort  
+**Impact** : Code plus lisible et maintenance facilitée
+
+#### **Leçon 4 : Configuration Playwright complète**
+**Problème** : Installation partielle des browsers (manque Firefox et WebKit)  
+**Solution** : Toujours utiliser `playwright install --with-deps chromium firefox webkit`  
+**Action** : Documenter l'installation complète dans le README et le CI  
+**Impact** : Environnement de développement complet et tests multi-browser possibles
+
+#### **Leçon 5 : Validation stricte de la Definition of Done**
+**Problème** : Déclaration "Code linté (ruff)" alors que le CI utilise flake8  
+**Solution** : Vérifier chaque point de la DoD avec preuve d'exécution  
+**Action** : Audit systématique avec tolérance zéro pour les violations  
+**Impact** : Confiance dans la qualité du livrable et respect des engagements
+
+#### **Résumé des bonnes pratiques établies** :
+1. **Pré-commit hooks** : Exécuter black/isort/flake8 avant chaque commit
+2. **Documentation exacte** : La PR doit refléter exactement l'état du code
+3. **Environnement complet** : S'assurer que toutes les dépendances sont installées
+4. **Tests locaux** : Exécuter les mêmes commandes que le CI localement
+5. **Review rigoureuse** : Vérifier chaque critère d'acceptation avec preuve
 
 ---
 
 ## 🔄 ÉVOLUTION DU BACKLOG
 
-### Sprint 0 (Current) - DevOps First
+### Sprint 0 (Completed) - DevOps First ✅
 - ✅ Documentation structure
 - ✅ Technical stack definition
-- 🔄 Infrastructure setup
-- 🔄 Walking skeleton
+- ✅ Infrastructure setup (Python, Git, CI/CD, Security)
+- ✅ Walking skeleton fonctionnel
+- ✅ Tests unitaires passants
+- ✅ Qualité de code validée (black/isort/flake8/mypy)
+- ✅ Playwright configuration complète
 
 ### Sprint 1 (Planned) - Core AI Engine
 - 📅 Crawl4AI + OpenAI integration
@@ -139,18 +179,24 @@
 - Planification du Sprint 0 (DevOps First)
 - Documentation complète du backlog
 
-### À venir : Lead-Dev
-- Implémentation technique du Sprint 0
-- Configuration de l'infrastructure
-- Création du walking skeleton
+### 2026-04-17 : Lead-Dev
+- ✅ Implémentation technique du Sprint 0
+- ✅ Configuration complète de l'infrastructure DevOps
+- ✅ Création du walking skeleton fonctionnel
+- ✅ Correction des problèmes de qualité de code identifiés
+- ✅ Installation complète de Playwright (Chromium, Firefox, WebKit)
 
-### À venir : Reviewer
-- Validation de la qualité du code
-- Vérification de la sécurité
-- Tests et assurance qualité
+### 2026-04-17 : Reviewer
+- ✅ Audit technique complet du Sprint 0
+- ✅ Validation de la qualité du code (black/isort/flake8/mypy)
+- ✅ Vérification de la sécurité (.env.example, pas de secrets en dur)
+- ✅ Tests et assurance qualité (4/4 tests passants)
+- ✅ Documentation des leçons apprises
 
 ---
 
-*Dernière mise à jour : 2026-04-17*  
+*Dernière mise à jour : 2026-04-17 (Sprint 0 Complété)*  
 *Product Owner : PSPO III*  
-*Version : 0.1.0 (Sprint 0 Planning)*
+*Lead-Dev : Sprint 0 Implementation*  
+*Reviewer : Sprint 0 Validation*  
+*Version : 0.1.0 (Sprint 0 - DevOps First ✅)*
