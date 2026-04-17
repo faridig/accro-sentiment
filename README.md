@@ -80,8 +80,10 @@ cp .env.example .env
 
 5. **Install Playwright browsers**
 ```bash
-playwright install
+playwright install --with-deps chromium firefox webkit
 ```
+
+**Note**: On CI systems, browsers are installed automatically. For local development, the above command installs all required browsers.
 
 6. **Run the walking skeleton**
 ```bash
@@ -135,6 +137,32 @@ flake8 src
 
 # Type checking
 mypy src
+```
+
+## 🔄 CI/CD Pipeline
+
+The project includes a comprehensive GitHub Actions pipeline:
+
+### Automated Checks
+- **Tests** : Runs pytest with coverage on Python 3.11 and 3.12
+- **Linting** : flake8, black, isort checks
+- **Type Checking** : mypy validation
+- **Security** : Secret scanning with gitleaks
+- **Build** : Package building and verification
+
+### Pipeline Status
+The pipeline runs automatically on:
+- Push to `main` or `develop` branches
+- Pull requests targeting `main`
+
+### Local Pre-commit
+To run CI checks locally before committing:
+```bash
+# Install pre-commit hooks
+pre-commit install
+
+# Run all checks
+pre-commit run --all-files
 ```
 
 ## 🔧 Development
